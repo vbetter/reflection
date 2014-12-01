@@ -1,3 +1,36 @@
 C#学习2014.12.1 8:31
 1.什么是反射
+反射提供了描述程序集、模块和类型的对象，通俗点说就是得到程序集中的属性和方法
+在运行时能检查和处理程序元素的功能。
 
+2.反射的作用
+（1）当需要访问程序元数据中的特性时。
+（2）检查和实例化程序集中的类型。
+（3）运行时构建新类型。
+（4）执行后期绑定，访问在运行时创建的类型的方法。
+
+
+例子1
+1.导入using Sytem.Reflection;
+2.Assembly.Load(“程序集”)加载程序集，返回类型是一个Assembly
+3.foreach(Type type in assembly.GetTypes())
+{
+   string t=type.Name;
+}
+4.Type type=assembly.GetType(“程序集.类名”);获取当前类的类型
+5.Activator.CreateInstance(type);创建此类型的实例
+6.MethodInfo info=type.getMethod(“方法名”);获取当前方法
+7.info.Invoke(null,方法参数);
+
+例子2
+int i=42;
+System.Type type=i.GetType();
+print(type);
+
+//输出为:System.Int32
+
+例子3
+System.Reflection.Assembly info = typeof(System.Int32).Assembly;
+System.Console.WriteLine(info);
+
+//输出为:mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
